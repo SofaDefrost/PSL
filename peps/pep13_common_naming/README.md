@@ -2,7 +2,7 @@ Common name of scene component and operations
 =============================================
 
 Contributors:
-    - damien.marchal@univ-lille.fr
+- damien.marchal@univ-lille.fr
 
 
 | Term           | Description                                                    |
