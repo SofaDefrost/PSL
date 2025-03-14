@@ -23,5 +23,6 @@ Existing peps:
 - pep #9 : Implements python controller in the scene description language (PSL)
 - pep #10: Hot Reload part of the scene graph at "Template" granularity when the file content change (PSL)
 - pep #11: Import python files containing "Template"(PSL)
-- pep #12: Describing SOFA components with type hints (PYTHON) 
+- pep #12: Describing SOFA components with type hints (PYTHON)
+- pep #13: Common naming and glossary (ANY) 
 
