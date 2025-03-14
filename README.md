@@ -7,6 +7,5 @@ The first release of PSL is now in the V1 branch and contains a first version of
 We are currently designing V2. 
 
 The main branch is thus expected non functionnal and experimental.  
-
-Please makes pull request to submit ideas you want to discus. 
+Please make pull requests to submit ideas you want to discus in the *pep* directory. 
 
