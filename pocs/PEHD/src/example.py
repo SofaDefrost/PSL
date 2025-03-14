@@ -1,7 +1,7 @@
 import Sofa.Core
 import copy
 import entity
-from entity import PrefabParameters, EntityParameters, Entity, Simulation
+from entity import PrefabParameters, EntityParameters, Entity, Simulation, GeometryFromFileParameters
 
 
 oldAdd=Sofa.Core.Node.addObject
@@ -20,6 +20,8 @@ Sofa.Core.Node.addObject = myAddObject
 
 
 def myAdd(self : Sofa.Core.Node, c, params = PrefabParameters(), **kwargs):  
+    params = copy.copy(params)
+
     def findName(cname, node):
         """Compute a working unique name in the node"""
         rname = cname 
@@ -31,9 +33,12 @@ def myAdd(self : Sofa.Core.Node, c, params = PrefabParameters(), **kwargs):
 
     for k,v in kwargs.items():
         if hasattr(params, k):
-            setattr(params, k, v)
-
-    params = copy.copy(params)
+            g = getattr(params,k)
+            if isinstance(g, dict): 
+                setattr(params, k, g | v)
+            else:
+                setattr(params, k, v)
+                
     if params.name in self.children:
         params.name = findName(params.name, self)
 
@@ -48,18 +53,20 @@ def createScene(root):
     #    self.addObject("LinearSolver", name="numericalsolver", firstOrder=True) 
 
     params = EntityParameters()
-    params.simulation.iterations = 10
-    params.simulation.integration["rayleighStiffness"] = 2.0
+    params.mechanical.template = "Rigid3"
+    params.mechanical.kwargs = { "showObject" : True, 
+                                 "showObjectScale" : 10.0 }
+
+    params.visual.geometry = GeometryFromFileParameters(filename="mesh/sphere_02.obj")
     params.addSimulation = entity.NONE
     
-    params.mechanical["template"] = "Rigid3"
+    root.add(Entity, name = "test", params=params)
+    # root.add(Entity, name = "NoHide", mechanical = {"kwargs" : {"showObject":False }}, params=params)
+    #root.add(Entity, params)
 
+    #params.simulation.iterations = 10
+    #params.simulation.integration["rayleighStiffness"] = 2.0
     #params.simulation.integration["rayleightStiffnessXXX"] = 2.0
-
     #params.solver.kwargs["numericalintegration"] = { "firstOrder" : True }
 
-    root.add(Entity, params)
-    root.add(Entity, params)
-    root.add(Entity, params)
-
-    #root.add(Simulation, name="mySimulation")
+    root.add(Simulation, name="mySimulation")
