@@ -1,10 +1,12 @@
-Python Scene Language for Sofa
-==============================
+Python Scene Languages for Sofa
+===============================
 
-The Python Scene Language (PSL) project is an attempt to mix the advantages of *scn* and *pyscn* in an
-unified framework. 
+The Python Scene Languages (PSL) project study the different way by which scene can be described in SOFA. 
 
-The first release of PSL is now in the V1 branch. 
+The first release of PSL is now in the V1 branch and contains a first version of PSL for python, json and xml. 
 We are currently designing V2. 
 
 The main branch is thus expected non functionnal and experimental.  
+
+Please makes pull request to submit ideas you want to discus. 
+
