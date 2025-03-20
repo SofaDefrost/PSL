@@ -12,7 +12,7 @@ def is_node_description(cls : type) -> bool:
 class MemberInfo(object):
     name : str
     value : typing.Any
-    type : type
+    type : type | None
 
     def __str__(self):
         return (str(self.name), str(self.value), str(type))
@@ -23,23 +23,17 @@ class SofaBase:
     name : str = "Unnamed"
 
     @classmethod
-    def get_data_declared(cls) -> dict[str, MemberInfo]:
-        
+    def get_data_declared(cls) -> dict[str, MemberInfo]:        
         selected_members = {}
-        print("RESULT ", cls.get_members_declared().values())
         for info in cls.get_members_declared().values():
-            print("PROCESS, ",info.name)
-            print("TOTO => ", type(info), info.name, info.type)
-            print("POURUQOI" )
-            if issubclass(info.type, BaseData):
-                selected_members[info.name] = info
+            if info.type is not None:
+                if info.type.is_data():
+                    selected_members[info.name] = info
         return selected_members
 
     @classmethod
     def get_members_declared(cls) -> dict[str, MemberInfo]:
         attributes = {}
-        print(" => ", typing.get_type_hints(cls))
-
         for name, value in typing.get_type_hints(cls).items():  
             attributes[name] = MemberInfo(name, None, type=value)
            
@@ -47,7 +41,7 @@ class SofaBase:
             if not name.startswith('_'):
                 if not inspect.ismethod(value) and not inspect.isfunction(value): 
                     if name in attributes:
-                        attributes[name] = MemberInfo(name=name, value=value, type=type(None))
+                        attributes[name] = MemberInfo(name=name, value=value, type=None)
                     else:
                         attributes[name] = MemberInfo(name=name, value=value, type=attributes[name].type)
         return attributes
@@ -67,11 +61,17 @@ class SofaBase:
 
         return type(cls.__name__+"Instance", (cls, ), attributes)
 
+    @classmethod
+    def is_data(cls): 
+        return False
+
 class LinkPath:
     pass 
 
 class BaseData:
-    pass
+    @classmethod
+    def is_data(cls):
+        return True
 
 # Here T is a generic type (if unused, just think of it as c++ template)
 class DataValue[T](BaseData):

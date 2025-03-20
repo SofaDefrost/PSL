@@ -130,7 +130,7 @@ class MainTests(unittest.TestCase):
             datatype : str = "Rigid3"
             renderer : OglModel 
 
-        self.assertEqual( set(VisualModel.get_data_declared().keys()), set(["renderer", "datatype", "name"]) ) 
+        self.assertEqual( set(VisualModel.get_data_declared().keys()), set(["bbox"]) ) 
 
 
 if __name__ == '__main__':
