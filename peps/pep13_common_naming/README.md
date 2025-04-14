@@ -8,9 +8,10 @@ Glossary:
 
 | Term           | Description                                                    |
 | -------------- | -------------------------------------------------------------- |
-| Sofa Object    | Component of the scene hierarchy implementing a given behavior |
+| Sofa Component | Component of the scene hierarchy implementing a given behavior |
+| Sofa Object    | Synonym of Sofa Object |
 | Sofa Node      | Component of the scene hierarchy holding other Sofa Node (often refered as childs) or Sofa Objects       |
-| Data           | Attribute of Sofa object and node                                  |
-| Sofa Component | Synonymous of Sofa Object                                          |
-| Prefab         | Assembly of Sofa Objects and Sofa Node (a "fragment" of a scene)   |
+| Sofa Data      | Attribute of Sofa object and node                                  |
+| Prefab         | A Sofa.Node assembling of Sofa Objects and Sofa Nodes (a "fragment" of a scene)   |
+| Entity         | A Physic oriented Prefab                                       |
 | Entity         | A Physic oriented Prefab                                       |
